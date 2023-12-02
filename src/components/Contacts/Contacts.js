@@ -3,7 +3,7 @@ import Form from '../Form/Form';
 import { Filter } from 'components/Filter/Filter';
 import css from '../Contacts/Contacts.module.css';
 import ContactsList from 'components/ContactsList/ContactsList';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 // import { selectFilteredContacts } from 'redux/contacts/selectors';
 import { getContactsThunk } from 'redux/operations';
 
