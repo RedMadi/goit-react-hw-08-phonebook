@@ -1,16 +1,18 @@
 import { ContactListItem } from 'components/ContactItem/ContactItem';
 import React, { useEffect } from 'react';
-import { deleteContactThunk } from 'redux/operations';
+import { deleteContact } from 'redux/contacts/operations';
 import { selectFilteredContacts } from 'redux/contacts/selectors';
 import { useDispatch, useSelector } from 'react-redux';
-import { getContactsThunk } from 'redux/operations';
+import { fetchContacts } from 'redux/contacts/operations';
 
 const ContactsList = () => {
   const contacts = useSelector(selectFilteredContacts);
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getContactsThunk());
+    dispatch(fetchContacts());
   }, [dispatch]);
+  // console.log('Contacts:', contacts);
+
   return (
     <div>
       <ul>
@@ -18,7 +20,7 @@ const ContactsList = () => {
           <ContactListItem
             key={contact.id}
             contact={contact}
-            onDeleteContact={() => deleteContactThunk(contact.id)}
+            onDeleteContact={() => dispatch(deleteContact(contact.id))}
           />
         ))}
       </ul>

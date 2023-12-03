@@ -20,14 +20,14 @@ export const fetchContacts = createAsyncThunk(
 export const addContact = createAsyncThunk(
   'contacts/addContact',
   async (contacts, thunkAPI) => {
-    const { name, number } = contacts;
+    const { name, phone } = contacts;
 
     try {
       const response = await axios.post('/contacts', {
         name: name,
-        number: number,
+        number: phone,
       });
-      toast.info(`${response.name} added to contacts.`);
+      toast.info(`${response.data.name} added to contacts.`);
       return response.data;
     } catch (error) {
       toast.error('oops.... something was wrong');
@@ -36,15 +36,27 @@ export const addContact = createAsyncThunk(
   }
 );
 
+// export const deleteContact = createAsyncThunk(
+//   'contacts/deleteContact',
+//   async (contactId, thunkAPI) => {
+//     try {
+//       const response = await axios.delete(`/contacts/${contactId}`);
+//       toast.info(`${response.name} removed from contacts.`);
+//       return response.data;
+//     } catch (error) {
+//       toast.error('oops.... something was wrong');
+//       return thunkAPI.rejectWithValue(error);
+//     }
+//   }
+// );
 export const deleteContact = createAsyncThunk(
   'contacts/deleteContact',
   async (contactId, thunkAPI) => {
     try {
-      const response = await axios.delete(`/contacts/${contactId}`);
-      toast.info(`${response.name} removed from contacts.`);
-      return response.data;
+      await axios.delete(`/contacts/${contactId}`);
+      return contactId;
     } catch (error) {
-      toast.error('oops.... something was wrong');
+      toast.error('Oops... something went wrong');
       return thunkAPI.rejectWithValue(error);
     }
   }

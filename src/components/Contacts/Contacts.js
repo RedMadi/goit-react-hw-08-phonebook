@@ -5,13 +5,13 @@ import css from '../Contacts/Contacts.module.css';
 import ContactsList from 'components/ContactsList/ContactsList';
 import { useDispatch } from 'react-redux';
 // import { selectFilteredContacts } from 'redux/contacts/selectors';
-import { getContactsThunk } from 'redux/operations';
+import { fetchContacts } from 'redux/contacts/operations';
 
 const ContactsView = () => {
   // const contacts = useSelector(selectFilteredContacts);
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getContactsThunk());
+    dispatch(fetchContacts());
   }, [dispatch]);
 
   return (

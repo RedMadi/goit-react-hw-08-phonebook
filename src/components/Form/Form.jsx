@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { FormContainer } from './Form.styled';
 import { useDispatch, useSelector } from 'react-redux';
-import { addContactThunk } from 'redux/operations';
+import { addContact } from 'redux/contacts/operations';
 import { getContacts } from 'redux/contacts/selectors';
 
 const Form = () => {
@@ -39,7 +39,7 @@ const Form = () => {
       alert(`Contact with the name ${name} already exists in the phonebook.`);
       return;
     }
-    dispatch(addContactThunk({ name, phone }));
+    dispatch(addContact({ name, phone }));
 
     setName('');
     setNumber('');
